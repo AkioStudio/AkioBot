@@ -1,0 +1,4 @@
+/logs/*
+/account/*
+general.config
+/node_modules/*

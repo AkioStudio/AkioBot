@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "icqq": "^0.4.14",
+    "json-format": "^1.0.1",
+    "pngjs": "^7.0.0",
+    "readline": "^1.3.0"
+  },
+  "name": "akio_bot",
+  "version": "0.0.1",
+  "description": "A tencent QQ bot",
+  "main": "echo \"try 'node ./dist/launch.js'\"",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "icqq"
+  ],
+  "author": "kamenomi",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.4.9",
+    "@types/pngjs": "^6.0.1"
+  }
+}
