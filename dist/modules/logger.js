@@ -112,10 +112,10 @@ Object.defineProperty(Logger, 'GetLog4JsSupport', {
     enumerable: true,
 });
 console.log = (...data) => {
-    if (data[0].includes(' [MARK] [icqq] - ')) {
+    if (data[0].includes('[icqq] - ')) {
         if (!GetProjectConfig().environment.debug)
             return;
-        data[0] = data[0].slice(44).trimStart();
+        data[0] = data[0].slice(45).trimStart();
         Logger.Debug('Module-ICQQ -', ...data);
         return;
     }

@@ -112,7 +112,7 @@ console.log = (...data: string[]) => {
   if (data[0].includes('[icqq] - ')) {
     if (!GetProjectConfig().environment.debug)
       return;
-    data[0] = data[0].slice(44).trimStart();
+    data[0] = data[0].slice(45).trimStart();
     Logger.Debug('Module-ICQQ -', ...data);
     return;
   };

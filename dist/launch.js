@@ -40,7 +40,8 @@ const Node_ReadLine = __importStar(require("node:readline"));
                 process.exit(0x0000);
             });
         }
-        ;
+        else
+            process.exit(0x0000);
     });
     // check null
     for (let key of Object.values({ ...conf.account, ...conf.environment }))

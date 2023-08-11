@@ -1,4 +1,5 @@
-/logs/*
-/account/*
+/dist
+/logs
+/account
+/node_modules
 general.config
-/node_modules/*

@@ -14,6 +14,12 @@ class ErrorFileException extends ErrorBase {
   };
 };
 
+class ErrorNetworkException extends ErrorBase {
+  public constructor(...msg: any[]) {
+    super('ErrorNetworkException', ...msg);
+  };
+};
+
 class ErrorContextException extends ErrorBase {
   public constructor(...msg: any[]) {
     super('ErrorContextException', ...msg);
@@ -29,6 +35,7 @@ class ErrorLoggerException extends ErrorBase {
 global.Errors = {
   ErrorFileException,
   ErrorLoggerException,
+  ErrorNetworkException,
   ErrorContextException
 };
 export { };

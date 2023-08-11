@@ -18,6 +18,13 @@ class ErrorFileException extends ErrorBase {
     ;
 }
 ;
+class ErrorNetworkException extends ErrorBase {
+    constructor(...msg) {
+        super('ErrorNetworkException', ...msg);
+    }
+    ;
+}
+;
 class ErrorContextException extends ErrorBase {
     constructor(...msg) {
         super('ErrorContextException', ...msg);
@@ -35,6 +42,7 @@ class ErrorLoggerException extends ErrorBase {
 global.Errors = {
     ErrorFileException,
     ErrorLoggerException,
+    ErrorNetworkException,
     ErrorContextException
 };
 //# sourceMappingURL=errors.js.map

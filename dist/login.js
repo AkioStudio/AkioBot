@@ -63,6 +63,7 @@ const pngjs_1 = __importDefault(require("pngjs"));
         if (!ProcessContext.processInit) {
             ProcessContext['processInit'] = true;
             Logger.Info('Start! Plugin.');
+            require('./pluginLoader');
         }
         ;
     })

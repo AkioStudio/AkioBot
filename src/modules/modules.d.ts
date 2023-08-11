@@ -31,9 +31,19 @@ declare global {
   };
   var JsonEx: JsonEx;
 
+  interface Nets {
+    /**
+     * Recv the json data by URL
+     * @param url
+     */
+    GetAsJSON(url: string): object;
+  };
+  var Nets: Nets;
+
   interface Errors {
     ErrorFileException: err.ErrorFileException;
     ErrorLoggerException: err.ErrorLoggerException;
+    ErrorNetworkException: err.ErrorNetworkException;
     ErrorContextException: err.ErrorContextException;
   };
   var Errors: Errors;

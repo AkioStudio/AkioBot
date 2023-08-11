@@ -11,7 +11,7 @@ import * as Node_ReadLine from 'node:readline';
       ProcessContext.client.logout(false).then(() => {
         process.exit(0x0000);
       });
-    };
+    } else process.exit(0x0000);
   });
   
 
@@ -44,4 +44,5 @@ import * as Node_ReadLine from 'node:readline';
   });
 })();
 
+// require('./pluginLoader');
 import './login';
