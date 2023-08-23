@@ -65,6 +65,5 @@ const Node_ReadLine = __importStar(require("node:readline"));
         log_config: Logger.GetLog4JsSupport()
     });
 })();
-// require('./pluginLoader');
 require("./login");
 //# sourceMappingURL=launch.js.map

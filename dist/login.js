@@ -63,7 +63,8 @@ const pngjs_1 = __importDefault(require("pngjs"));
         if (!ProcessContext.processInit) {
             ProcessContext['processInit'] = true;
             Logger.Info('Start! Plugin.');
-            require('./pluginLoader');
+            // require('./pluginLoader');
+            AccountLogin();
         }
         ;
     })
@@ -77,4 +78,13 @@ const pngjs_1 = __importDefault(require("pngjs"));
     // 原神，启动！
     this.login(conf.account.qq_id, conf.account.password);
 }).call(ProcessContext.client);
+const pluginLoader_v2_1 = __importDefault(require("./pluginLoader_v2"));
+function AccountLogin() {
+    const test = new pluginLoader_v2_1.default.ScriptLoader;
+    test.LoadScript();
+    setTimeout(() => {
+        test.OutputMapList();
+    }, 1000);
+}
+;
 //# sourceMappingURL=login.js.map

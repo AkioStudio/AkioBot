@@ -13,13 +13,13 @@ import * as Node_ReadLine from 'node:readline';
       });
     } else process.exit(0x0000);
   });
-  
+
 
   // check null
-  for (let key of Object.values({...conf.account, ...conf.environment}))
+  for (let key of Object.values({ ...conf.account, ...conf.environment }))
     if (typeof key == 'object')
       throw new Errors.ErrorFileException('Missing Config. ');
-  
+
   // check config
   if (!new RegExp(/[1-9][0-9]{4,14}/)
     .test(conf
@@ -30,7 +30,7 @@ import * as Node_ReadLine from 'node:readline';
 
   if (0 > conf.environment.platform && conf.environment.platform > 6)
     throw new Errors.ErrorContextException('Incorrect platform. ');
-  
+
 
   // create client context
   ProcessContext['client'] = Mod_ICQQ.createClient({
@@ -44,5 +44,4 @@ import * as Node_ReadLine from 'node:readline';
   });
 })();
 
-// require('./pluginLoader');
 import './login';

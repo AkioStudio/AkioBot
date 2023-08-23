@@ -36,12 +36,19 @@ declare global {
      * Recv the json data by URL
      * @param url
      */
-    GetAsJSON(url: string): object;
+    async GetAsJSON(url: string): object;
+
+    /**
+     * Network Request
+     * @param url
+     */
+    async RequestAsJSON<T extends object>(url: string, options): Promise<T>;
   };
   var Nets: Nets;
 
   interface Errors {
     ErrorFileException: err.ErrorFileException;
+    ErrorSymbolException: err.ErrorSymbolException;
     ErrorLoggerException: err.ErrorLoggerException;
     ErrorNetworkException: err.ErrorNetworkException;
     ErrorContextException: err.ErrorContextException;

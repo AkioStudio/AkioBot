@@ -27,31 +27,31 @@ import Mod_PNGjs from 'pngjs';
       };
     };
   })
-  .on('system.login.slider', event => {
-    console.log('Pass the verify from the URL, and get its ticket. ');
-    console.log(event.url);
-    ProcessContext.terminalController.once('line', ticket => {
-      this.submitSlider(ticket);
+    .on('system.login.slider', event => {
+      console.log('Pass the verify from the URL, and get its ticket. ');
+      console.log(event.url);
+      ProcessContext.terminalController.once('line', ticket => {
+        this.submitSlider(ticket);
+      });
+    })
+    .on('system.login.device', event => {
+      console.log(`Dear ${event.phone}, `);
+      console.log('Device verify, select: A sms-code | B Verify Online | ELSE quit. ');
+      ProcessContext.terminalController.once('line', choose => {
+        choose = choose.toLowerCase();
+        if (choose == 'a') {
+          this.sendSmsCode()
+          ProcessContext.terminalController.once('line', ticket => {
+            this.submitSmsCode(ticket);
+          });
+        }
+        else if (choose == 'b') {
+          console.log('Pass it! ', event.url)
+        } else {
+          this.logout(false).then(() => process.exit(0x01));
+        };
+      });
     });
-  })
-  .on('system.login.device', event => {
-    console.log(`Dear ${event.phone}, `);
-    console.log('Device verify, select: A sms-code | B Verify Online | ELSE quit. ');
-    ProcessContext.terminalController.once('line', choose => {
-      choose = choose.toLowerCase();
-      if (choose == 'a') {
-        this.sendSmsCode()
-        ProcessContext.terminalController.once('line', ticket => {
-          this.submitSmsCode(ticket);
-        });
-      }
-      else if (choose == 'b') {
-        console.log('Pass it! ', event.url)
-      } else {
-        this.logout(false).then(() => process.exit(0x01));
-      };
-    });
-  });
 
   this.on('system.online', () => {
     Logger.Info('Account Online!');
@@ -59,17 +59,27 @@ import Mod_PNGjs from 'pngjs';
     if (!ProcessContext.processInit) {
       ProcessContext['processInit'] = true;
       Logger.Info('Start! Plugin.');
-      require('./pluginLoader');
+      // require('./pluginLoader');
+      AccountLogin();
     };
   })
-  .on('system.offline', err => {
-    Logger.Info('Account Offline, ', err.message);
-  })
-  .on('system.login.error', err => {
-    console.error('ERR, ', err.code, err.message);
-  });
+    .on('system.offline', err => {
+      Logger.Info('Account Offline, ', err.message);
+    })
+    .on('system.login.error', err => {
+      console.error('ERR, ', err.code, err.message);
+    });
 
   var conf = GetProjectConfig();
   // 原神，启动！
   this.login(conf.account.qq_id, conf.account.password);
 }).call(ProcessContext.client);
+
+import loader from './pluginLoader_v2';
+function AccountLogin() {
+  const test = new loader.ScriptLoader;
+  test.LoadScript()
+  setTimeout(() => {
+    test.OutputMapList();
+  }, 1000);
+};

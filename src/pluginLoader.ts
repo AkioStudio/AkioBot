@@ -1,11 +1,12 @@
 import Mod_ICQQ from 'icqq';
 import Node_FS from 'node:fs';
+import './pluginCommon';
 
 ; (async function PluginLoaderMain() {
   var pathList = Node_FS.readdirSync(process.cwd() + '/dist/plugins/', { encoding: 'utf-8' });
   pathList = pathList.filter(script => !script.endsWith('map'));
 
-  for (let idx = 0; idx < pathList.length; idx ++){
+  for (let idx = 0; idx < pathList.length; idx++) {
     var script = pathList[idx];
     var fileName = script.split('.').slice(0, -1).join('.');
     var included = await import('./plugins/' + script);
@@ -65,7 +66,7 @@ import Node_FS from 'node:fs';
 })();
 
 export default class CpluginBase {
-  client: Mod_ICQQ.Client = ProcessContext.client; 
+  client: Mod_ICQQ.Client = ProcessContext.client;
   logger: Logger = Logger;
   public constructor(
     readonly registerInfo: TpluginInformation
