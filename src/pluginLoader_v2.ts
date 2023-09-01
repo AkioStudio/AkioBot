@@ -156,12 +156,12 @@ class ScriptEventDispatcher {
   /**
    * 群聊消息事件调度
    */
-  public GroupEventDispatcher(event: icqq.GroupMessageEvent) {
+  public async GroupEventDispatcher(event: icqq.GroupMessageEvent) {
     if (!IsRequest(event)) return;
 
     const BotId = this.Client.uin;
     const Raw = event.raw_message.replace(
-        event.group.pickMember(BotId).card || this.Client.nickname,
+        (await event.group.getMemberMap(true)).get(BotId)!.card || this.Client.nickname,
         String(BotId)
       );
 
@@ -179,7 +179,7 @@ class ScriptEventDispatcher {
       if (!(new RegExp(Request.name)).test(RequestCmd)) continue;
 
       (_pluginMap.get(Request.scoureUUID) as any)
-        ?.context[Request.callback](event);
+        ?.context[Request.callback](event, RequestBlocks);
       
       break;
     };
@@ -200,7 +200,7 @@ class ScriptCommon {
   * @param [zIndex=32767] zIndex, Smaller and More prior.
   * @param disable Disable that, just won't let it works.
   */
-  public RegisterRequest(name: string, callback: string, options?: TrequestOption) {
+  public RegisterRequest(name: string, callback: string, options?: Partial<TrequestOption>) {
     CheckRequestSymbol(this.PLUGIN_NAME, name = '/' + name);
     if ([..._requestMap.entries()].map(val => val[0].name).includes(name))
       return Logger.Info(`${this.PLUGIN_NAME}@${name}() Has been registered. `);
@@ -275,7 +275,7 @@ export default {
 function IsRequest(message: icqq.Message): boolean {
   var Block = message.message;
   if (Block[0].type != 'text'
-    || Block[1].type != 'at'
+    || Block[1]?.type != 'at'
     || (Block[2] && Block[2].type != 'text')
   ) return false;
 

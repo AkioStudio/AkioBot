@@ -128,7 +128,7 @@ Then NodeJS ORIGIN: ${origin}`
 
 .on('unhandledRejection', async (reason, prprpr) => {
 Logger.Warn(
-`UnHandleRejection happend. Reason: ${reason} (bruh).`
+`UnHandleRejection happend. Reason: ${JSON.stringify(reason)} (bruh).`
 ); FailTimes += 1})
 
 .on('beforeExit', () => {
